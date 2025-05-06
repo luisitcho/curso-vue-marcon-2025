@@ -20,9 +20,10 @@
                         <img :src="image" :alt="img_product" />
                     </div>
                     <div class="product-info">
-                        <h1>T-Shirt</h1>
-                        <p>In Stock</p>
-                        <!-- INFO DO PRODUTO -->
+                        <h1>{{ product_title }}</h1>
+                        <p v-if="in_stock > 50">In Stock</p>
+                        <p v-else-if="in_stock < 50 && in_stock > 1">Almost of out</p>
+                        <p v-else>Out of Stock</p>
                     </div>
                 </div>
             </div>
