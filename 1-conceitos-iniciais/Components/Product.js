@@ -1,7 +1,8 @@
-const { ref, computed } = Vue;
-
-const ProductDisplay = {
+export default {
+    name: "ProductDisplay",
     setup() {
+        const { ref, computed } = Vue;
+
         const image = ref("./assets/img/t-shirt-blue.png");
         function changeImage(variant) {
             image.value = variant;
@@ -9,9 +10,7 @@ const ProductDisplay = {
 
         const product_title = "T-Shirt";
         const brand = "Vue Mastery";
-        const title = computed(() => {
-            return `${product_title} ${brand}`;
-        });
+        const title = computed(() => `${product_title} ${brand}`);
 
         const in_stock = ref(100);
         const inStock = computed(() => {
@@ -20,7 +19,6 @@ const ProductDisplay = {
                 { condition: (qty) => qty > 1, message: "Almost out" },
                 { condition: () => true, message: "Out of Stock" },
             ];
-
             return rules.find((rule) => rule.condition(in_stock.value)).message;
         });
 
@@ -57,28 +55,22 @@ const ProductDisplay = {
                 <div class="product-info">
                     <h1>{{ title }}</h1>
                     <p>{{ inStock }}</p>
-
                     <ul>
                         <li v-for="(detail, index) in details" :key="index">
                             {{ detail }} {{ index }}
                         </li>
                     </ul>
-
                     <div v-for="variant in variants" :key="variant.id" @mouseover="changeImage(variant.image)"
                         class="color-circle" :style="{ backgroundColor: variant.color }">
                     </div>
-
                     <button 
                         :class="['button', 'p-2', { disabledButton: isOutOfStock }]" 
                         @click="$emit('add-to-cart')"
                         :disabled="isOutOfStock">
                         Add to Cart
                     </button>
-
                 </div>
             </div>
         </div>
     `,
 };
-
-export default ProductDisplay;

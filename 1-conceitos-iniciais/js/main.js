@@ -1,3 +1,4 @@
+import Cart from "../Components/Cart.js";
 import ProductDisplay from "../Components/Product.js";
 const { createApp, ref } = Vue;
 
@@ -14,7 +15,8 @@ const app = createApp({
         };
     },
     components: {
-        ProductDisplay, // Registra o componente
+        ProductDisplay,
+        Cart,
     },
 });
 
