@@ -25,10 +25,8 @@
                         <img :src="image" :alt="img_product" />
                     </div>
                     <div class="product-info">
-                        <h1>{{ product_title }}</h1>
-                        <p v-if="in_stock > 50">In Stock</p>
-                        <p v-else-if="in_stock < 50 && in_stock > 1">Almost of out</p>
-                        <p v-else>Out of Stock</p>
+                        <h1>{{ title }}</h1>
+                        <p>{{ inStock }}</p>
 
                         <ul>
                             <li v-for="(detail, index) in details" :key="index">
@@ -36,21 +34,15 @@
                             </li>
                         </ul>
 
-                        <div 
-                            v-for="variant in variants" 
-                            :key="variant.id" 
-                            @mouseover="changeImage(variant.image)" 
-                            class="color-circle"
-                            :style="{ backgroundColor: variant.color }">
+                        <div v-for="variant in variants" :key="variant.id" @mouseover="changeImage(variant.image)"
+                            class="color-circle" :style="{ backgroundColor: variant.color }">
                         </div>
 
-                        <button 
-                            class="button p-2"
-                            :class="{ disabledButton: in_stock < 1 }"
-                            @click="addToCart()" 
-                            :disabled="in_stock < 1">
-                            Add To Cart
+                        <button :class="['button', 'p-2', { disabledButton: isOutOfStock }]" @click="addToCart()"
+                            :disabled="isOutOfStock">
+                            Add to Cart
                         </button>
+
                     </div>
                 </div>
             </div>
