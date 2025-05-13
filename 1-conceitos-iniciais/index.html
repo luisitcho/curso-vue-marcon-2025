@@ -17,7 +17,7 @@
 <body>
     <div class="container">
         <div id="app">
-            <cart></cart>
+            <cart-display :cart="cart"></cart-display>
             <product-display @add-to-cart="addToCart"></product-display>
         </div>
     </div>
